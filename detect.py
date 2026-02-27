@@ -9,7 +9,7 @@ from sklearn.metrics import mean_absolute_error
 st.title("🛒 Amazon Price Prediction App")
 
 def load_data():
-    data = pd.read_csv("Price_detection.xls")
+    data = pd.read_csv("Price_detection")
     data["Price"] = (data["Price_USD"] * 90.94).round().astype(int)
     data.drop(columns=["Price_USD"], inplace=True)
     return data
@@ -60,4 +60,5 @@ if st.button("Predict Price"):
     input_data = pd.get_dummies(input_data)
     input_data = input_data.reindex(columns=x.columns, fill_value=0)
     prediction = model.predict(input_data)
+
     st.success(f"Predicted Price: ₹ {round(prediction[0], 2)}")
